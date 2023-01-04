@@ -1,0 +1,46 @@
+.border-manage {
+  height: 90;
+  box-sizing: border-box;
+}
+#add-employee {
+  box-sizing: border-box;
+  height: fit-content;
+}
+#manage {
+  position: relative;
+  height: 100vh;
+  width: 70vw;
+  overflow: hidden;
+}
+.search {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+th,
+td {
+  border: 1px solid #ffffff;
+  border-style: ridge;
+  text-align: left;
+  padding: 8px;
+  font-size: 16px;
+}
+
+th {
+  background-color: rgb(117, 201, 250);
+}
+
+td {
+  background-color: rgb(205, 235, 253);
+}

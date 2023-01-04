@@ -1,0 +1,11 @@
+.profile {
+  box-sizing: content-box;
+  height: 200px;
+  width: 200px;
+  margin-left: 70px;
+  border: 1px solid red;
+}
+
+.about-head {
+  text-align: center;
+}
