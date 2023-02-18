@@ -24,9 +24,12 @@ class HeroSection extends React.Component {
                 </p>
                 <button className="btn btn-primary btn-lg">Try the app</button>
               </div>
-              <a href="#">
-                <img src="./bg.png" class="img-fluid" width={1500} />
-              </a>
+              <img
+                src="./bg.png"
+                className="img-fluid"
+                width={1500}
+                alt="logo"
+              />
             </div>
           </div>
         </section>

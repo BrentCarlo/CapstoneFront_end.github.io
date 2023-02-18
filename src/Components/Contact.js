@@ -54,13 +54,13 @@ class Contact extends React.Component {
                   </Form>
                   <Container className="icons py-5 h1 mb-3 md-flex">
                     <a href="https://www.facebook.com/brentcarlo.bermejo">
-                      <i class="bi bi-facebook"></i>
+                      <i className="bi bi-facebook"></i>
                     </a>
                     <a href="mailto:someone@example.com">
-                      <i class="bi bi-envelope"></i>
+                      <i className="bi bi-envelope"></i>
                     </a>
                     <a href="https://github.com/BrentCarlo">
-                      <i class="bi bi-github"></i>
+                      <i className="bi bi-github"></i>
                     </a>
                   </Container>
                 </Col>

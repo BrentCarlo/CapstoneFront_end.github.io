@@ -5,7 +5,10 @@ class Footer extends React.Component {
     return (
       <div className="" id="footer">
         <section className=" my-2">
-          <div className="container py-2">
+          <div className="container ">
+            <a href="#top" className="arrow-top">
+              <i className="bi bi-arrow-up-circle h1"></i>
+            </a>
             <p>Privacy Policy</p>
             <p>
               © Copyright{" "}

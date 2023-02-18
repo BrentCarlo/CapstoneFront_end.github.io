@@ -1,23 +1,58 @@
 import React from "react";
 import "./LogIn.css";
+import axios from "axios";
 
 class LogForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {},
+    };
+  }
+
+  login(e) {
+    e.preventDefault();
+    console.log(e.target.username.value);
+    console.log(e.target.password.value);
+    axios
+      .post("http://localhost:4000/login", {
+        username: e.target.username.value,
+        password: e.target.password.value,
+      })
+      .then((response) => {
+        console.log(response);
+        if(response.data.length > 0){
+          console.log(true);
+        }else{
+          console.log(false);
+        }
+     
+       window.location.href = response.data.length > 0 ? '/user_profile' : '/login';
+      })
+  }
+
   render() {
     return (
       <div id="logForm">
         <div className="log-in" id="login">
           <h1 className="text-center text-white">ClockWorkz</h1>
-          <img src="./bg.jpg" className="img-fluid rounded" id="clock" />
-          <form>
+          <img
+            src="./bg.jpg"
+            className="img-fluid rounded"
+            id="clock"
+            alt="logo"
+          />
+          <form onSubmit={this.login}>
             <div className="form-group">
-              <label className="form-label text-white" htmlFor="email">
-                Email address
+              <label className="form-label text-white" htmlFor="username">
+                Username
               </label>
               <input
                 className="form-control"
-                type="email"
-                id="email"
-                placeholder="sample@gmail.com"
+                name="username"
+                type="text"
+                id="text"
+                placeholder="Enter: username"
                 required
               />
             </div>
@@ -27,24 +62,12 @@ class LogForm extends React.Component {
               </label>
               <input
                 className="form-control"
+                name="password"
                 type="password"
                 id="password"
                 placeholder="*******"
                 required
               />
-            </div>
-            <div className="form-group form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="checkbox"
-              />
-              <label
-                className="form-checkl-label text-white"
-                htmlFor="checkbox"
-              >
-                Remember me
-              </label>
             </div>
             <div className="form-group">
               <input

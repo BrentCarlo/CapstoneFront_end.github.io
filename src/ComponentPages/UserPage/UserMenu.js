@@ -1,46 +1,44 @@
-import React, { Component } from "react";
+import React from "react";
 import "./UserMenu.css";
+import { Container, Nav, Navbar, Image } from "react-bootstrap";
 
 class UserMenu extends React.Component {
   render() {
     return (
       <div>
-        <nav>
-          <ul>
-            <li>
-              <a href="#" className="logo my-3">
-                <img src="./workz.jpg" alt="logo" id="img" className="my-5" />
-                <span className="nav-item">Employee</span>
-              </a>
-            </li>
-            <hr className="text-white" />
-            <li>
-              <a href="#">
-                <i className="bi bi-person-fill"></i>
-                <span className="nav-item">Profile</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i className="bi bi-bar-chart-steps"></i>
-                <span className="nav-item">Attendance</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i className="bi bi-database-fill"></i>
-                <span className="nav-item">Calendar</span>
-              </a>
-            </li>
-            <hr className="text-white" />
-            <li>
-              <a href="#" className="logout">
-                <i className="bi bi-box-arrow-right"></i>
-                <span className="nav-item">Log out</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <Navbar
+          bg="dark"
+          expand="lg"
+          variant="dark"
+          fixed="top"
+          className="navbar"
+        >
+          <Container className="usermenu">
+            <Navbar.Brand>
+              <h3 className="">
+                ClockWorkz
+                <Image src="../workz.jpg" alt="logo" className="user-image " />
+              </h3>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="ms-auto">
+                <Nav.Link href="/user_profile">
+                  Profile
+                  <i className="bi bi-person px-3"></i>
+                </Nav.Link>
+                <Nav.Link href="/user_attendance">
+                  Attendance
+                  <i className="bi bi-clock px-3"></i>
+                </Nav.Link>
+                <Nav.Link href="/login" className="logout">
+                  Logout
+                  <i className="bi bi-box-arrow-right px-3"></i>
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
       </div>
     );
   }

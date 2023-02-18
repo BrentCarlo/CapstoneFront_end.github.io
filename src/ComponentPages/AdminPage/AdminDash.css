@@ -1,54 +1,6 @@
-.dashboard {
-  position: static;
-  padding: 20px;
-  width: 100%;
+.dashboardHeader {
+  border: 1px solid red;
 }
-.dashboard-top {
-  display: flex;
-  width: 100%;
-}
-.dashboard-top h1 {
-  font-weight: bold;
-}
-.dashboard-top i {
-  float: right;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 10px 0 0 10px;
-  color: rgb(110, 109, 109);
-  cursor: pointer;
-}
-.bi {
-  position: relative;
-  width: 70px;
-  top: 20px;
-  font-size: 30px;
-  text-align: center;
-  margin-left: 30px;
-  padding-bottom: 25px;
-}
-.dashboard .users {
-  display: flex;
-  width: 100%;
-}
-.users .card {
-  width: 25%;
-  margin: 10px;
-  background: #fff;
-  text-align: center;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
-.users .card img {
-  border-radius: 50%;
-}
-.users .card h4 {
-  text-transform: uppercase;
-}
-.users .card p {
-  font-size: 12px;
-  margin-bottom: 15px;
-  text-transform: uppercase;
+.card-content {
+  font-size: 35px;
 }
