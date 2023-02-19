@@ -6,7 +6,12 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <Navbar bg="dark" variant="dark" fixed="top">
+        <Navbar   
+          bg="dark"
+          expand="lg"
+          variant="dark"
+          fixed="top"
+          className="navbar">
           <Container>
             <Navbar.Brand href="#home">
               <img
@@ -17,7 +22,10 @@ class NavBar extends React.Component {
                 className="d-inline-block align-top"
               />{" "}
               Clock Workz
+           
             </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto" id="navlinks">
               <Nav.Link href="#top">Home</Nav.Link>
               <Nav.Link href="#services">Services</Nav.Link>
@@ -25,6 +33,7 @@ class NavBar extends React.Component {
               <Nav.Link href="/login">Application</Nav.Link>
               <Nav.Link href="">About</Nav.Link>
             </Nav>
+            </Navbar.Collapse>
           </Container>
         </Navbar>
       </div>

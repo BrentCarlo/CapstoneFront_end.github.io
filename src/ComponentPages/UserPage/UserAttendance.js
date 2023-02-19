@@ -5,13 +5,14 @@ import {
   Row,
   Col,
   Image,
-  Form,
   Button,
   Modal,
+  Card
 } from "react-bootstrap";
 import "./UserAttendance.css";
 import { GOOGLE_API_KEY } from "./apikey";
 import Clock from "./Clock";
+import axios from "axios";
 
 class UserAttendance extends React.Component {
   constructor(props) {
@@ -28,8 +29,8 @@ class UserAttendance extends React.Component {
     this.getLocation = this.getLocation.bind(this);
     this.getCoordinates = this.getCoordinates.bind(this);
     this.getAddress = this.getAddress.bind(this);
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
+    // this.showModal = this.showModal.bind(this);
+    // this.hideModal = this.hideModal.bind(this);
   }
 
   // Get Address
@@ -85,29 +86,51 @@ class UserAttendance extends React.Component {
 
   // Modal confirmation
 
-  showModal(e) {
-    this.setState({ show: true });
-  }
+  // showModal(e) {
+  //   this.setState({ show: true });
+  // }
 
-  hideModal(e) {
-    this.setState({ show: false });
-  }
+  // hideModal(e) {
+  //   this.setState({ show: false });
+  // }
 
   // Send Data
 
-  // stampAttendance(e) {
-  //   e.preventDefault();
+  componentDidMount = () => {
+    axios.get('http://localhost:4000/user_attendance')
+    .then((response) => {
+      console.log(response)
+      this.setState({
+        users:response.data,
+      })
 
-  // componentDidMount() {
-  //   fetch("`http://localhost:4000/user_attendance")
-  //     .then((response) => {
-  //       console.log(response);
-  //       this.setState({ users: response.data });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
+    })
+  }
+
+  stampAttendance =(e) => {
+    e.preventDefault();
+
+    console.log(e.target.location.value);
+    console.log(e.target.remarks.value);
+    axios.post('http://localhost:4000/user_attendance',{
+      location: e.target.location.value,
+      remarks: e.target.location.value,
+    
+
+
+    })
+    .then((response) =>{
+      this.setState({
+        users: [...this.state.users, {
+          location: e.target.location.value ,
+          remarks: e.target.remarks.value,
+          
+        }]
+      })
+    })
+  }
+
+
   render() {
     const { users } = this.state;
     return (
@@ -124,7 +147,7 @@ class UserAttendance extends React.Component {
                 className="container container-fluid  px-5 py-5"
                 id="form-attendance"
               >
-                <form className="my-5">
+                <form className="my-5" onSubmit={this.stampAttendance}> 
                   <Clock />
                   <Row className="justify-content-md-center">
                     <Col md="auto">
@@ -133,69 +156,78 @@ class UserAttendance extends React.Component {
                         fluid
                         className="image-attendance"
                       />
-                      <Form.Group controlId="formFileLg" className="mb-3">
-                        <Form.Label>Upload Selfie</Form.Label>
-                        <Form.Control type="file" size="sm" />
-                      </Form.Group>
+                      <div className="form-group">
+                        <div className="mb-3">
+                      <label htmlFor="upload" className="form-label">Upload Selfie</label>
+                      <input className="form-control form-control-sm" id="upload" type="file" name="upload" />
+                    </div>
+                      <label className="form-label" htmlFor="username">
+                      Location
+                      </label>
+                      <input
+                        className="form-control"
+                        name="location"
+                        type="text"
+                        id="text"
+                        placeholder="Type in your Location"
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="password">
+                        Remarks
+                      </label>
+                      <input
+                        className="form-control"
+                        name="remarks"
+                        type="text"
+                        id="text"
+                        placeholder="sample:(time in / time out)"
+                        required
+                      />
+                    </div>
                     </Col>
-                    <Col md="auto" className="my-3">
-                      <Form.Select aria-label="Default select example">
-                        <option>Check in Location</option>
-                        <option value="1">Home</option>
-                        <option value="2">Office</option>
-                        <option value="3">Store</option>
-                      </Form.Select>
-                    </Col>
-                    <Col md="auto" className="my-3">
+                    <Col md="auto" className="">
+                       <Image
+                        src="../location.png"
+                        fluid
+                        className="image-attendance"
+                      />
+                      <p style={{fontSize:'10px'}} className="address">Address : {this.state.userAddress}</p>
                       <Button
                         className="btn btn-primary"
                         onClick={this.getLocation}
+                        
                       >
                         Verify Location
                       </Button>
-                      <p>Address : {this.state.userAddress}</p>
+                      </Col>
+                      <Col>
+                      <div style={{height:'300px' ,overflow:"scroll" , width:'400px'}}>
+                      <h3>Itenerary</h3>
+                      {users.length
+                        ? users.map((user) =>
+                        
+                          <div className="text-start container-fluid" key={user.id}>
+                            <ul style={{fontWeight:"bold"}}   >
+                              <li>Location:{user.location}</li>
+                              <li>Verified Location :{user.verifylocation}</li>
+                              <li>Remarks :{user.remarks}</li>
+                            </ul>
+                          </div>
+                        )
+                        : null}
+                        </div>           
                     </Col>
-                    </Row>
-                    <Row md='auto'>
-                    <Col >
-                      <Modal show={this.state.show} centered>
-                        <Modal.Header>
-                          <Modal.Title>Notice</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>Stamp Attendance?</Modal.Body>
-                        <Modal.Footer>
-                          <Button
-                            onClick={this.stampAttendance}
-                            variant="primary"
-                            size="lg"
-                            active
-                          >
-                            Yes
-                          </Button>
-                          <Button
-                            onClick={this.hideModal}
-                            variant="secondary"
-                            size="lg"
-                            active
-                          >
-                            Exit
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                      <Button variant="primary" onClick={this.showModal}>
-                        Stamp your attendance
-                      </Button>
-                    </Col>
-                    </Row>
+                     </Row>
+                     <Row>
+                      <Col md='auto'>
+                     <Button type="submit" className="btn btn__primary">
+                       Stamp Attendance
+                     </Button>
+                     </Col>
+                     </Row>
                 </form>
-                <div className="">
-                 <h3>Itenerary</h3>
-                  {users.length
-                    ? users.map((users) => (
-                        <div key={users.id}>{users.userid}</div>
-                      ))
-                    : null}
-                </div>
               </div>
             </div>
           </Container>
