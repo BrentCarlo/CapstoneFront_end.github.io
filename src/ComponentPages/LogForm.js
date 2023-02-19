@@ -15,7 +15,7 @@ class LogForm extends React.Component {
     console.log(e.target.username.value);
     console.log(e.target.password.value);
     axios
-      .post("http://localhost:4000/login", {
+      .post("http://late-spies-do-175-176-31-13.loca.lt/login", {
         username: e.target.username.value,
         password: e.target.password.value,
       })
